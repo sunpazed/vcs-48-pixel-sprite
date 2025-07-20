@@ -1,0 +1,24 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# testing
+coverage
+
+# production
+build
+prg
+bin
+
+# misc
+.vscode
+.DS_Store
+.env
+old
+build.sh
+release.sh
+*.prg
+*.iq
+*.debug.xml
+nyan-settings.json
+
+artwork/tif_tiles/py
+artwork/tif_tiles/m1
