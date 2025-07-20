@@ -1,5 +1,5 @@
 
-	processor 6502
+    processor 6502
     include "inc/vcs.h"
     include "inc/macro.h"
     include "inc/xmacro.h"
@@ -7,28 +7,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     seg.u Variables
-	org $80
+    org $80
 
 ; ---- sprite pointers  
-s1		        .byte $00,$00
-s2		        .byte $00,$00
-s3		        .byte $00,$00
-s4 		        .byte $00,$00
-s5		        .byte $00,$00
-s6		        .byte $00,$00
-pf		        .byte $00,$00
+s1                .byte $00,$00
+s2                .byte $00,$00
+s3                .byte $00,$00
+s4                .byte $00,$00
+s5                .byte $00,$00
+s6                .byte $00,$00
+pf                .byte $00,$00
 
 
 ; ---- sprite variables
-XPosition	    .byte $00,$00
-Direction       .byte $01
+XPosition         .byte $00,$00
+Direction         .byte $01
 
 ; ---- delay pointer
-DelayPTR	    .byte $00,$00
+DelayPTR          .byte $00,$00
 
 ; ---- various shared variables
-Temp		    .byte $00
-LoopCount	    .byte $00
+Temp              .byte $00
+LoopCount         .byte $00
 
 ; ---- constants
 THREE_COPIES    equ %011 ; for NUSIZ registers
@@ -107,17 +107,17 @@ NextFrame:
 ; -------------------------------------------------
 InitSprites:
     ; turn on virtual disp
-    lda #$01	
+    lda #$01    
     sta VDELP0
     sta VDELP1
 
     ; three copies into sprite num/size
-    lda #THREE_COPIES	
+    lda #THREE_COPIES    
     sta NUSIZ0
     sta NUSIZ1
 
     ; sprite colour is black
-    lda #$01	
+    lda #$01    
     sta COLUP0
     sta COLUP1
     
@@ -237,10 +237,10 @@ DoPosition:
     sta HMCLR     
     bit 0 ; exactly 3 cycles for timing!
 .largeSpritePositionDivideLoop:
-    sbc #15		
+    sbc #15        
     bcs .largeSpritePositionDivideLoop
     eor #7
-    asl		
+    asl        
     asl
     asl
     asl
@@ -250,14 +250,14 @@ DoPosition:
     sbc #$f0
     sta HMP1
     sta WSYNC
-    sleep 72	; minimise whiskers
+    sleep 72    ; minimise whiskers
     sta HMOVE
     rts
 
 ; -------------------------------------------------
 DoDelayOffset:
-	; large sprite delay calculation.
-	; this is done by dividing the xpos / 3
+    ; large sprite delay calculation.
+    ; this is done by dividing the xpos / 3
     ; we do this every frame
 DivideBy3:
     ; rough approximation of A/3
@@ -351,7 +351,7 @@ Joe0:
     .byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01,$02,$03,$02,$02,$02,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01,$02,$02,$04,$04,$08,$08,$08,$08,$08,$07,$07,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0d,$04,$03,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 Joe1:
     .byte $00,$00,$00,$38,$3c,$3e,$3e,$2e,$1e,$17,$1f,$17,$1f,$16,$3e,$2e,$46,$72,$4a,$86,$05,$cd,$17,$05,$05,$09,$0b,$94,$e1,$82,$40,$40,$20,$20,$20,$13,$1d,$15,$17,$1c,$11,$e1,$20,$20,$20,$20,$60,$50,$50,$50,$60,$ae,$a1,$c1,$c1,$e1,$f1,$f1,$f1,$fd,$f1,$f5,$f1,$71,$e8,$04,$06,$09,$10,$10,$08,$0d,$0a,$08,$13,$14,$14,$0a,$08,$12,$12,$39,$3e,$3e,$3f,$7f,$7f,$3f,$3f,$3f,$1f,$0f,$07,$03        
-    align $100	
+    align $100    
 Joe2:
     .byte $18,$3c,$3c,$64,$7c,$64,$7c,$64,$3c,$24,$3e,$22,$42,$5e,$62,$4a,$55,$41,$41,$81,$80,$41,$26,$98,$40,$a0,$40,$a0,$80,$40,$20,$00,$00,$00,$01,$e1,$5a,$56,$f5,$0e,$02,$04,$08,$0a,$12,$14,$14,$10,$10,$08,$78,$89,$09,$19,$1e,$3e,$7f,$ff,$ff,$ff,$ff,$fb,$fa,$f3,$e6,$7c,$24,$04,$88,$48,$28,$48,$4c,$4e,$0f,$87,$6b,$9f,$1e,$5a,$5a,$3e,$de,$1e,$1e,$9e,$be,$fe,$fe,$fe,$fc,$fc,$b8,$10
 Joe3:
